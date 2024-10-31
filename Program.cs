@@ -2,6 +2,15 @@
 
 namespace EJ_2_LAB
 {
+    //
+    // 2.- Crear un programa para una Liberia que te permita registrar el nombre del libro y su precio, usando arreglos unidimensionales, realizar lo siguiente:
+    //
+    //      •	Registrar libros y su precio (precio tiene que ser si o si decimal positivo no enteros ni otro tipo de dato).
+    //      •	Mostrar los libros y precio registrados.
+    //      •	Buscar libro por nombre.
+    //      •	Modificar el libro y precio, mediante el nombre.
+    //      •	Crear un menú.
+    //   
     internal class Program2
     {
         public string[] Libros = new string[0];
