@@ -1,5 +1,4 @@
 using System;
-
 namespace LAB2
 {
     // 2.- Crear un programa para una Liberia que te permita registrar el nombre del libro y su precio, usando arreglos unidimensionales, realizar lo siguiente:
