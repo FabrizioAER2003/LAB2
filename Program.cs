@@ -34,7 +34,7 @@ namespace EJ_2_LAB
         {
             double precio;
             Console.Write("\nIngrese el precio: ");
-            while(!double.TryParse(Console.ReadLine().Trim(), out precio)||precio%1==0) {Console.Write("\nPrecio no valido. Por favor, ingrese un precio decimal valido. (ejemplo: 12.34)\nIngrese el precio nuevamente -> "); }
+            while(!double.TryParse(Console.ReadLine().Trim(), out precio)||precio%1==0) {Console.Write("\nPrecio no valido. Por favor, ingrese un precio decimal valido. (ejemplo: 12.34)\nIngrese el precio nuevamente: "); }
             Array.Resize(ref Precios, Precios.Length + 1);
             Precios[Precios.Length - 1] = precio;
             Console.WriteLine("¡Precio registrado con exitos! :D \n");
@@ -91,7 +91,7 @@ namespace EJ_2_LAB
                         Console.Write("\nIngrese el nuevo precio: ");
                         while (!double.TryParse(Console.ReadLine().Trim(), out Pcambio) || Pcambio % 1 == 0)
                         {
-                            Console.Write("\nPrecio no valido. Por favor, ingrese un precio decimal valido. (ejemplo: 12.34)\nIngrese el precio nuevamente -> ");
+                            Console.Write("\nPrecio no valido. Por favor, ingrese un precio decimal valido. (ejemplo: 12.34)\nIngrese el precio nuevamente: ");
                         }
                         Precios[Indice] = Pcambio;
                         Console.WriteLine("¡Precio modificado con éxito! :D \n");break;
@@ -105,7 +105,7 @@ namespace EJ_2_LAB
         }
         public static void Main(string[] args)
         {
-            byte opcion1, opcion2;
+            byte opcion1;
             char Regresar;
             Program2 pro = new Program2();
 
@@ -119,15 +119,10 @@ namespace EJ_2_LAB
                 {
                     case 0: Console.Clear(); Environment.Exit(0); break;
                     case 1:
-                        Console.Write("\n1.- Registrar Libro\n2.- Registrar Precio\nIngrese una opcion: ");
-                        while (!byte.TryParse(Console.ReadLine(), out opcion2) || opcion2 > 2) { Console.Write("\n[ERROR][ERROR][ERROR][ERROR][ERROR]\nIngrese nuevamente que opcion desea: "); }
-                        switch (opcion2)
-                        {
-                            case 1: char opc1; do { Console.Clear(); pro.RegistrarL(); Console.Write("\n¿Desea seguir registrando libros? [S/N] -> "); opc1 = char.ToUpper(Console.ReadKey().KeyChar); } while (opc1 == 'S'); break;
-                            case 2: char opc2; do { Console.Clear(); pro.RegistrarP(); Console.Write("\n¿Desea seguir registrando precios? [S/N] -> "); opc2 = char.ToUpper(Console.ReadKey().KeyChar); } while (opc2 == 'S'); break;
-
-                        }
-                        break;
+                        char opc0;
+                        do 
+                        { Console.Clear(); pro.RegistrarL(); pro.RegistrarP(); Console.Write("\n¿Desea seguir registrando? [S/N] -> "); opc0 = char.ToUpper(Console.ReadKey().KeyChar); } while (opc0 == 'S'); break;
+                        
                     case 2: Console.Clear(); pro.Mostrar(); break;
                     case 3: Console.Clear(); pro.Buscar(); break;
                     case 4: char opcM; do { Console.Clear(); pro.Modificar(); Console.Write("\n¿Desea seguir modificando? [S/N] -> "); opcM = char.ToUpper(Console.ReadKey().KeyChar); } while (opcM == 'S'); break;
