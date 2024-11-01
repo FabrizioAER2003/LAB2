@@ -2,7 +2,6 @@ using System;
 
 namespace LAB2
 {
-    //
     // 2.- Crear un programa para una Liberia que te permita registrar el nombre del libro y su precio, usando arreglos unidimensionales, realizar lo siguiente:
     //
     //      •	Registrar libros y su precio (precio tiene que ser si o si decimal positivo no enteros ni otro tipo de dato).
@@ -10,13 +9,10 @@ namespace LAB2
     //      •	Buscar libro por nombre.
     //      •	Modificar el libro y precio, mediante el nombre.
     //      •	Crear un menú.
-    //      
     internal class Program2
     {
         public string[] Libros = new string[0];
         public double[] Precios = new double[0];
-
-
         public void Menu()
         {
             Console.WriteLine(" ------------------------------------------ ");
@@ -43,7 +39,6 @@ namespace LAB2
         {
             string libro;
             Console.Write("\nIngrese el libro: "); libro = Console.ReadLine().ToUpper();
-
             Array.Resize(ref Libros, Libros.Length + 1);
             Libros[Libros.Length - 1] = libro;
             Console.WriteLine("¡Libro registrado con exito! :D \n");
@@ -101,7 +96,6 @@ namespace LAB2
                 }
             }
             else { Console.WriteLine("No existe"); }
-
         }
         public static void Main(string[] args)
         {
@@ -112,7 +106,6 @@ namespace LAB2
             do
             {
                 pro.Menu();
-
                 Console.SetCursorPosition(9, 11); Console.Write("¿Que opcion desea? -> ");
                 while (!byte.TryParse(Console.ReadLine(), out opcion1) || opcion1 > 4) { Console.Write("\n[ERROR][ERROR][ERROR][ERROR][ERROR]\nIngrese nuevamente que opcion desea: "); }
                 switch (opcion1)
@@ -122,11 +115,9 @@ namespace LAB2
                         char opc0;
                         do 
                         { Console.Clear(); pro.RegistrarL(); pro.RegistrarP(); Console.Write("\n¿Desea seguir registrando? [S/N] -> "); opc0 = char.ToUpper(Console.ReadKey().KeyChar); } while (opc0 == 'S'); break;
-                        
                     case 2: Console.Clear(); pro.Mostrar(); break;
                     case 3: Console.Clear(); pro.Buscar(); break;
                     case 4: char opcM; do { Console.Clear(); pro.Modificar(); Console.Write("\n¿Desea seguir modificando? [S/N] -> "); opcM = char.ToUpper(Console.ReadKey().KeyChar); } while (opcM == 'S'); break;
-
                 }
                 Console.Write("\t\n\n¿Desea regresar al MENÚ? [S/N] -> "); Regresar = char.ToUpper(Console.ReadKey().KeyChar); Console.Clear();
             } while (Regresar == 'S');
