@@ -10,12 +10,11 @@ namespace EJ_2_LAB
     //      •	Buscar libro por nombre.
     //      •	Modificar el libro y precio, mediante el nombre.
     //      •	Crear un menú.
-    //   
+    //      
     internal class Program2
     {
         public string[] Libros = new string[0];
         public double[] Precios = new double[0];
-
 
         public void Menu()
         {
@@ -33,13 +32,8 @@ namespace EJ_2_LAB
         public void RegistrarP()
         {
             double precio;
-            string dec;
-            while (true)
-            {
-                Console.Write("\nIngrese el precio: "); dec = Console.ReadLine().Trim();
-                if (double.TryParse(dec, out precio) && precio > 0 && dec.Contains(".")) { break; }
-                Console.WriteLine("Precio no valido. Por favor, ingrese un precio decimal valido. (ejemplo: 99.99) ");
-            }
+            Console.Write("\nIngrese el precio: ");
+            while(!double.TryParse(Console.ReadLine().Trim(), out precio)||precio%1==0) {Console.Write("\nPrecio no valido. Por favor, ingrese un precio decimal valido. (ejemplo: 12.34)\nIngrese el precio nuevamente -> "); }
             Array.Resize(ref Precios, Precios.Length + 1);
             Precios[Precios.Length - 1] = precio;
             Console.WriteLine("¡Precio registrado con exitos! :D \n");
@@ -85,7 +79,7 @@ namespace EJ_2_LAB
             Console.Write("\n\nIngrese el nombre del libro a buscar para modificar: "); string buscar = Console.ReadLine().ToUpper(); Console.Clear();
             int Indice = Array.IndexOf(Libros, buscar);
             double Pcambio;
-            string Ncambio, dec;
+            string Ncambio;
             if (Indice != -1)
             {
                 Console.Write("\n¿Desea modificar el precio o el nombre del libro? [P/L] -> "); char opc3 = char.ToUpper(Console.ReadKey().KeyChar);
@@ -93,20 +87,13 @@ namespace EJ_2_LAB
                 switch (opc3)
                 {
                     case 'P':
-                        while (true)
+                        Console.Write("\nIngrese el nuevo precio: ");
+                        while (!double.TryParse(Console.ReadLine().Trim(), out Pcambio) || Pcambio % 1 == 0)
                         {
-                            Console.Write("\nIngrese el nuevo precio: ");
-                            dec = Console.ReadLine().Trim();
-
-                            if (double.TryParse(dec, out Pcambio) && Pcambio > 0 && dec.Contains("."))
-                            {
-                                Precios[Indice] = Pcambio;
-                                Console.WriteLine("¡Precio modificado con éxito! :D \n");
-                                break;
-                            }
-                            Console.WriteLine("Precio no válido. Por favor, ingrese un precio decimal válido. (ejemplo: 99.99) ");
+                            Console.Write("\nPrecio no valido. Por favor, ingrese un precio decimal valido. (ejemplo: 12.34)\nIngrese el precio nuevamente -> ");
                         }
-                        Console.WriteLine("¡Precio modificado con exito! :D \n"); break;
+                        Precios[Indice] = Pcambio;
+                        Console.WriteLine("¡Precio modificado con éxito! :D \n");break;
                     case 'L':
                         Console.Write("\nIngrese el nuevo nombre del libro a modificar: ");
                         Ncambio = Console.ReadLine().ToUpper(); Libros[Indice] = Ncambio; Console.WriteLine("¡Libro modificado con exito! :D"); break;
@@ -129,7 +116,7 @@ namespace EJ_2_LAB
                 while (!byte.TryParse(Console.ReadLine(), out opcion1) || opcion1 > 4) { Console.Write("\n[ERROR][ERROR][ERROR][ERROR][ERROR]\nIngrese nuevamente que opcion desea: "); }
                 switch (opcion1)
                 {
-                    case 0: Environment.Exit(0); break;
+                    case 0: Console.Clear(); Environment.Exit(0); break;
                     case 1:
                         Console.Write("\n1.- Registrar Libro\n2.- Registrar Precio\nIngrese una opcion: ");
                         while (!byte.TryParse(Console.ReadLine(), out opcion2) || opcion2 > 2) { Console.Write("\n[ERROR][ERROR][ERROR][ERROR][ERROR]\nIngrese nuevamente que opcion desea: "); }
@@ -137,13 +124,11 @@ namespace EJ_2_LAB
                         {
                             case 1: char opc1; do { Console.Clear(); pro.RegistrarL(); Console.Write("\n¿Desea seguir registrando libros? [S/N] -> "); opc1 = char.ToUpper(Console.ReadKey().KeyChar); } while (opc1 == 'S'); break;
                             case 2: char opc2; do { Console.Clear(); pro.RegistrarP(); Console.Write("\n¿Desea seguir registrando precios? [S/N] -> "); opc2 = char.ToUpper(Console.ReadKey().KeyChar); } while (opc2 == 'S'); break;
-
                         }
                         break;
                     case 2: Console.Clear(); pro.Mostrar(); break;
                     case 3: Console.Clear(); pro.Buscar(); break;
                     case 4: char opcM; do { Console.Clear(); pro.Modificar(); Console.Write("\n¿Desea seguir modificando? [S/N] -> "); opcM = char.ToUpper(Console.ReadKey().KeyChar); } while (opcM == 'S'); break;
-
                 }
                 Console.Write("\t\n\n¿Desea regresar al MENÚ? [S/N] -> "); Regresar = char.ToUpper(Console.ReadKey().KeyChar); Console.Clear();
             } while (Regresar == 'S');
