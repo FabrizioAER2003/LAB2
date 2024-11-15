@@ -21,6 +21,8 @@ namespace LAB2
             Console.WriteLine("|             2.-  Mostrar                 |");
             Console.WriteLine("|             3.-   Buscar                 |");
             Console.WriteLine("|             4.- Modificar                |");
+            Console.WriteLine("|             5.-  Eliminar                |");
+            Console.WriteLine("|             6.-  Ordenar                 |");
             Console.WriteLine("|             0.-   Salir                  |");
             Console.WriteLine("|                                          |");
             Console.WriteLine(" ------------------------------------------\n");
@@ -29,7 +31,8 @@ namespace LAB2
         {
             double precio;
             Console.Write("\nIngrese el precio: ");
-            while(!double.TryParse(Console.ReadLine().Trim(), out precio)||precio%1==0) {Console.Write("\nPrecio no valido. Por favor, ingrese un precio decimal valido. (ejemplo: 12.34)\nIngrese el precio nuevamente: "); }
+            while(!double.TryParse(Console.ReadLine().Trim(), out precio)||precio%1==0) 
+            {Console.Write("\nPrecio no valido. Por favor, ingrese un precio decimal valido. (ejemplo: 12.34)\nIngrese el precio nuevamente: "); }
             Array.Resize(ref Precios, Precios.Length + 1);
             Precios[Precios.Length - 1] = precio;
             Console.WriteLine("¡Precio registrado con exitos! :D \n");
@@ -96,27 +99,69 @@ namespace LAB2
             }
             else { Console.WriteLine("No existe"); }
         }
+        public void EliminarL(string lebro)
+        {
+            int Indice = Array.IndexOf(Libros, lebro);
+            if (Indice != -1) 
+            { 
+                for (int j=Indice;j < Libros.Length - 1;j++) { Libros[j] = Libros[j + 1]; } 
+                Array.Resize(ref Libros,Libros.Length-1);Array.Resize(ref Precios, Precios.Length - 1); Console.WriteLine("\nLibro eliminado con exito! :D");
+            }
+            else { Console.WriteLine($"\nEl libro \"{lebro}\" no existe en el arreglo"); }
+        }
+        public void OrdenarCaroABarato()
+        {
+            for (int i = 0; i < Precios.Length - 1; i++)
+            {
+                for (int j = 0; j > Precios.Length - i - 1; j++)
+                { if (Precios[j] > Precios[j + 1]) { double temp = Precios[j]; Precios[j] = Precios[j + 1]; Precios[j + 1] = temp; } }
+            }
+            Console.WriteLine("\nSe ha ordenado exitosamente!");
+
+            //En proceso
+        }
+        public void OrdenarBaratoACaro()
+        {
+            for (int i = 0; i < Precios.Length - 1; i++)
+            {
+                for (int j = 0; j < Precios.Length - i - 1; j++)
+                { if (Precios[j] > Precios[j + 1]) { double temp = Precios[j]; Precios[j] = Precios[j + 1]; Precios[j + 1] = temp; } }
+            }
+            Console.WriteLine("\nSe ha ordenado exitosamente!");
+
+            //En proceso
+        }
         public static void Main(string[] args)
         {
-            byte opcion1;
+            byte opcion1,opcion2;
             char Regresar;
             Program2 pro = new Program2();
 
             do
             {
                 pro.Menu();
-                Console.SetCursorPosition(9, 11); Console.Write("¿Que opcion desea? -> ");
-                while (!byte.TryParse(Console.ReadLine(), out opcion1) || opcion1 > 4) { Console.Write("\n[ERROR][ERROR][ERROR][ERROR][ERROR]\nIngrese nuevamente que opcion desea: "); }
+                Console.SetCursorPosition(9, 13); Console.Write("¿Que opcion desea? -> ");
+                while (!byte.TryParse(Console.ReadKey(true).KeyChar.ToString(), out opcion1) || opcion1 > 6) { Console.Write("\n[ERROR][ERROR][ERROR][ERROR][ERROR]\nIngrese nuevamente que opcion desea: "); }
                 switch (opcion1)
                 {
                     case 0: Console.Clear(); Environment.Exit(0); break;
                     case 1:
                         char opc0;
-                        do 
+                        do
                         { Console.Clear(); pro.RegistrarL(); pro.RegistrarP(); Console.Write("\n¿Desea seguir registrando? [S/N] -> "); opc0 = char.ToUpper(Console.ReadKey().KeyChar); } while (opc0 == 'S'); break;
                     case 2: Console.Clear(); pro.Mostrar(); break;
                     case 3: Console.Clear(); pro.Buscar(); break;
                     case 4: char opcM; do { Console.Clear(); pro.Modificar(); Console.Write("\n¿Desea seguir modificando? [S/N] -> "); opcM = char.ToUpper(Console.ReadKey().KeyChar); } while (opcM == 'S'); break;
+                    case 5: Console.Clear(); Console.Write("\nIngrese el libro para eliminar: "); string labro = Console.ReadLine().ToString(); pro.EliminarL(labro); break;
+                    case 6: 
+                        Console.Write("\n1.- Ordenar de caro a barato" + "\n2.- Ordenar de barato a caro" + "\nIngrese como desea ordenarlo -> ");
+                        while (!byte.TryParse(Console.ReadKey(true).KeyChar.ToString(), out opcion2) || opcion2 > 2) { Console.Write("\n[ERROR][ERROR][ERROR][ERROR][ERROR]\nIngrese nuevamente que opcion desea: "); }
+                        switch (opcion2)
+                        { 
+                            case 1: pro.OrdenarCaroABarato();Console.ReadKey();Console.Clear(); pro.Mostrar(); break;
+                            case 2: break;
+                        }
+                        break;                
                 }
                 Console.Write("\t\n\n¿Desea regresar al MENÚ? [S/N] -> "); Regresar = char.ToUpper(Console.ReadKey().KeyChar); Console.Clear();
             } while (Regresar == 'S');
