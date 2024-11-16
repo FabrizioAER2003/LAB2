@@ -45,7 +45,6 @@ namespace LAB2
             Libros[Libros.Length - 1] = libro;
             Console.WriteLine("¡Libro registrado con exito! :D \n");
         }
-
         public void Mostrar()
         {
             Console.SetCursorPosition(0, 0); Console.Write("POSICION");
@@ -117,7 +116,6 @@ namespace LAB2
                 { if (Precios[j] > Precios[j + 1]) { double temp = Precios[j]; Precios[j] = Precios[j + 1]; Precios[j + 1] = temp; } }
             }
             Console.WriteLine("\nSe ha ordenado exitosamente!");
-
             //En proceso
         }
         public void OrdenarBaratoACaro()
@@ -128,7 +126,6 @@ namespace LAB2
                 { if (Precios[j] > Precios[j + 1]) { double temp = Precios[j]; Precios[j] = Precios[j + 1]; Precios[j + 1] = temp; } }
             }
             Console.WriteLine("\nSe ha ordenado exitosamente!");
-
             //En proceso
         }
         public static void Main(string[] args)
