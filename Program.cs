@@ -8,6 +8,7 @@ namespace LAB2
     //      •	Buscar libro por nombre.
     //      •	Modificar el libro y precio, mediante el nombre.
     //      •	Crear un menú.
+
     internal class Program2
     {
         public string[] Libros = new string[0];
